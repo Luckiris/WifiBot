@@ -1,6 +1,18 @@
-network
-    send
-    get
-message
-    rawToRead
-    readToRaw
+Network
+    Send void
+    Get
+Message             // mère de probe et command
+    RawToRead 
+    ReadToRaw
+Probe Abstraite     // mère de capteur
+    GetRaw int
+    ProcessDataToRead
+Command             //envoie commande au robot
+    SendInstruction //envoie commande tel que "tourner a droite" a Message
+{capteur}           //pour chaque capteur avec traitement des données
+    GetRaw
+    ProcessDataToRead
+Graphic             //classe mère graphique
+
+
+
