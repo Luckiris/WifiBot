@@ -1,0 +1,6 @@
+network
+    send
+    get
+message
+    rawToRead
+    readToRaw
