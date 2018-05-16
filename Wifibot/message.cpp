@@ -21,8 +21,8 @@ Message::Message()
 
 void Message::ReadToRaw(int SpeedLeft, int SpeedRight, int sensLeft, int sensRight){
     int char7=248;
-    Data[2]=SpeedLeft;
-    Data[4]=SpeedRight;
+    Data[2]=SpeedLeft;//vitesse de gauche 0 -> 240
+    Data[4]=SpeedRight;//vit de droite 0 -> 240
     if(sensLeft==-1){
         char7=char7-64;
     }

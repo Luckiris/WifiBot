@@ -15,19 +15,20 @@ void Network::ClearList(){
     listMessagesToSend.clear();
 }*/
 
-void Network::Connect(){
+void Network::DoConnect(){
     this->socket = new QTcpSocket(this);
-    connect(this->socket, SIGNAL(connected()),this, SLOT(connected()));
-    connect(this->socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
-    connect(this->socket, SIGNAL(bytesWritten(qint64)),this, SLOT(bytesWritten(qint64)));
-    connect(this->socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    this->connect(this->socket, SIGNAL(connected()),this, SLOT(connected()));
+    //connect(pointeur_sur_Emetteur, &ClasseEmetteur::signalAEmettre, pointeur_sur_recepteur, &ClasseRecepteur:
+    this->connect(this->socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
+    this->connect(this->socket, SIGNAL(bytesWritten(qint64)),this, SLOT(bytesWritten(qint64)));
+    this->connect(this->socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
     this->socket->connectToHost("192.168.1.106", 15020);
     if (!socket->waitForConnected(5000)){
         qDebug() << "Erreur à la connexion :" << socket->errorString();
     }
 }
 
-void Network::Disconnect(){
+void Network::DoDisconnect(){
     this->socket->disconnectFromHost();
     this->socket->close();
 }
@@ -46,6 +47,7 @@ void Network::disconnected(){
 void Network::bytesWritten(qint64 bytes){
     qDebug() << bytes << " bytes written...";
 }
+
 
 void Network::readyRead(){
     qDebug() << "reading...";

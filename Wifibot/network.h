@@ -20,8 +20,8 @@ public:
     Network(QObject *parent = 0, QString ip = "0.0.0.0", int port = 0);
     //void AddMessage(Message m);
     void ClearList();
-    void Connect();
-    void Disconnect();
+    void DoConnect();
+    void DoDisconnect();
 
 public slots:
     void connected();

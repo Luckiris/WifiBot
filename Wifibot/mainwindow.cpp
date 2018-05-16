@@ -16,5 +16,5 @@ MainWindow::~MainWindow()
 void MainWindow::on_buttonConnect_clicked()
 {
     Network n;
-    n.Connect();
+    n.DoConnect();
 }
