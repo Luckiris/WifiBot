@@ -20,8 +20,13 @@ public:
 private slots:
     void on_buttonConnect_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Network n;
 };
 
 #endif // MAINWINDOW_H

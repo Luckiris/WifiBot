@@ -15,6 +15,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_buttonConnect_clicked()
 {
-    Network n;
     n.DoConnect();
+}
+
+void MainWindow::on_pushButton_clicked()//bouton avance
+{
+    //n.
+}
+
+void MainWindow::on_pushButton_2_clicked()//bouton stop
+{
+
 }
