@@ -4,7 +4,7 @@
 
 Message::Message()
 {
-    static QChar Data[9] = { 255, 0x07,0, 0, 0, 0, 0, 0x00, 0x00 };//chaine de donné brute
+    static char* Data[9] = { '255', '0x07','0', '0', '0', '0', '0', 0x00, 0x00 };//chaine de donné brute
     //static QChar Raw[21]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     static int SpeedL=0;
     static int SpeedR=0;
@@ -21,15 +21,15 @@ Message::Message()
 
 void Message::ReadToRaw(int SpeedLeft, int SpeedRight, int sensLeft, int sensRight){
     int char7=248;
-    Data[2]=SpeedLeft;//vitesse de gauche 0 -> 240
-    Data[4]=SpeedRight;//vit de droite 0 -> 240
+    Data[2]=(char) SpeedLeft;//vitesse de gauche 0 -> 240
+    Data[4]=(char) SpeedRight;//vit de droite 0 -> 240
     if(sensLeft==-1){
         char7=char7-64;
     }
     if(sensRight==-1){
         char7=char7-16;
     }
-    Data[7]=char7;
+    Data[6]=char7;//[255,0x07,240,0,240,0,248,0,0]
 }
 
 void Message::RawToRead(int Raw[]){

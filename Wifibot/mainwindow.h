@@ -24,9 +24,12 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
     Network n;
+    short Crc16(unsigned char *Adresse_tab , unsigned char Taille_max);
 };
 
 #endif // MAINWINDOW_H

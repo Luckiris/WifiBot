@@ -10,6 +10,7 @@
 
 class Network : public QObject
 {
+    Q_OBJECT
 private:
     //QList<Message> listMessagesToSend;
     //QList<Message> listMessagesReceived;
@@ -22,6 +23,7 @@ public:
     void ClearList();
     void DoConnect();
     void DoDisconnect();
+    void SendMessage(char* msg);
 
 public slots:
     void connected();

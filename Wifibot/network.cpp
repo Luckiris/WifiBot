@@ -37,7 +37,7 @@ void Network::connected(){
     qDebug() << "connected...";
 
     // Hey server, tell me about you.
-    socket->write("HEAD / HTTP/1.0\r\n\r\n\r\n\r\n");
+    //socket->write("HEAD / HTTP/1.0\r\n\r\n\r\n\r\n");
 }
 
 void Network::disconnected(){
@@ -54,4 +54,8 @@ void Network::readyRead(){
 
     // read the data from the socket
     qDebug() << socket->readAll();
+}
+
+void Network::SendMessage(char *msg){
+    socket->write(msg);
 }

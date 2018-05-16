@@ -7,7 +7,7 @@
 class Message
 {
 public:
-    QChar Data[];//data a envoyer au robot depuis network
+    char* Data[];//data a envoyer au robot depuis network
     //QChar Raw[];//data reçus du robot depuis network
     int SpeedL;
     int SpeedR;
