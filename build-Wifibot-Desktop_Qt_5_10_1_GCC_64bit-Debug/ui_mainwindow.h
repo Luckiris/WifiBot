@@ -43,11 +43,11 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         buttonConnect = new QPushButton(centralWidget);
         buttonConnect->setObjectName(QStringLiteral("buttonConnect"));
-        buttonConnect->setGeometry(QRect(510, 480, 93, 28));
+        buttonConnect->setGeometry(QRect(590, 470, 93, 28));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1261, 26));
+        menuBar->setGeometry(QRect(0, 0, 1261, 22));
         menuWifiBot_Controller = new QMenu(menuBar);
         menuWifiBot_Controller->setObjectName(QStringLiteral("menuWifiBot_Controller"));
         MainWindow->setMenuBar(menuBar);

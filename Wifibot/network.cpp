@@ -17,8 +17,11 @@ void Network::ClearList(){
 
 void Network::Connect(){
     this->socket = new QTcpSocket(this);
-    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
-    this->socket->connectToHost(ip, port);
+    connect(this->socket, SIGNAL(connected()),this, SLOT(connected()));
+    connect(this->socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
+    connect(this->socket, SIGNAL(bytesWritten(qint64)),this, SLOT(bytesWritten(qint64)));
+    connect(this->socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    this->socket->connectToHost("192.168.1.106", 15020);
     if (!socket->waitForConnected(5000)){
         qDebug() << "Erreur à la connexion :" << socket->errorString();
     }
@@ -29,6 +32,24 @@ void Network::Disconnect(){
     this->socket->close();
 }
 
+void Network::connected(){
+    qDebug() << "connected...";
+
+    // Hey server, tell me about you.
+    socket->write("HEAD / HTTP/1.0\r\n\r\n\r\n\r\n");
+}
+
+void Network::disconnected(){
+    qDebug() << "disconnected...";
+}
+
+void Network::bytesWritten(qint64 bytes){
+    qDebug() << bytes << " bytes written...";
+}
+
 void Network::readyRead(){
-    qDebug() << "Data lues :" << socket->readAll();
+    qDebug() << "reading...";
+
+    // read the data from the socket
+    qDebug() << socket->readAll();
 }

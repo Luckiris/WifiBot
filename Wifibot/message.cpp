@@ -5,7 +5,7 @@
 Message::Message()
 {
     static QChar Data[9] = { 255, 0x07,0, 0, 0, 0, 0, 0x00, 0x00 };//chaine de donné brute
-    static QString Read[21]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    //static QChar Raw[21]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     static int SpeedL=0;
     static int SpeedR=0;
     static QChar BatLevel=0;

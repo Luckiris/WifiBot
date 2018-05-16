@@ -23,10 +23,11 @@ public:
     void Connect();
     void Disconnect();
 
-signals:
-
 public slots:
+    void connected();
     void readyRead();
+    void bytesWritten(qint64 bytes);
+    void disconnected();
 };
 
 #endif // NETWORK_H

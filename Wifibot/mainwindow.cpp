@@ -12,3 +12,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_buttonConnect_clicked()
+{
+    Network n;
+    n.Connect();
+}
