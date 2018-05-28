@@ -30,6 +30,12 @@ private slots:
 
     void on_Right_triggered(QAction *arg1);
     
+    void on_Down_triggered(QAction *arg1);
+    
+    void on_Up_triggered(QAction *arg1);
+    
+    void on_Left_triggered(QAction *arg1);
+    
 private:
     Ui::MainWindow *ui;
     Network n;
