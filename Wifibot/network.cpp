@@ -56,6 +56,6 @@ void Network::readyRead(){
     qDebug() << socket->readAll();
 }
 
-void Network::SendMessage(char *msg){
+void Network::SendMessage(QByteArray msg){
     socket->write(msg);
 }

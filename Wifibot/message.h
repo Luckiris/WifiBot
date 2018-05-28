@@ -21,8 +21,11 @@ public:
     QChar Current;
     QChar Version;
     Message();
+    QByteArray data;
     void ReadToRaw(int SpeedLeft, int SpeedRight, int sensLeft, int sensRight);
     void RawToRead(int Raw[]);
+    short Crc16(unsigned char *Adresse_tab , unsigned char Taille_max);
+    QByteArray GetData();
 };
 
 #endif // MESSAGE_H

@@ -20,26 +20,8 @@ void MainWindow::on_Se_connecter_clicked()
 
 void MainWindow::on_Avance_clicked()//bouton avance
 {
-    char* msg[7];
-    char* msg_[9];
-    msg_[0]="255";
-    msg[0]="0x07";
-    msg[1]="0";//3
-    msg[2]="120";
-    msg[3]="0";
-    msg[4]="120";
-    msg[5]="0x50";
-    //short temp=Crc16(msg,6);
-    msg_;
-    for(int i=0;i<6;i++){
-        msg_[i+1]=msg[i];
-    }
-    //msg_[7]=temp;
-    //msg_[8]=(temp>>8);
-    qDebug()<<msg;
-    //qDebug()<<temp;
-    qDebug()<<msg_;
-    //n.SendMessage(msg_);
+    Message m;
+    n.SendMessage(m.GetData());
 }
 
 void MainWindow::on_Stop_clicked()//bouton stop
@@ -110,7 +92,8 @@ void MainWindow::on_Down_triggered(QAction *arg1)//on appuie sur le bouton bas
 
 void MainWindow::on_Up_triggered(QAction *arg1)//on appuie sur le bouton haut
 {
-
+    Message m;
+    n.SendMessage(m.GetData());
 }
 
 void MainWindow::on_Left_triggered(QAction *arg1)//on appuie sur le bouton gauche

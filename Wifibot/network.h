@@ -23,7 +23,7 @@ public:
     void ClearList();
     void DoConnect();
     void DoDisconnect();
-    void SendMessage(char* msg);
+    void SendMessage(QByteArray msg);
 
 public slots:
     void connected();

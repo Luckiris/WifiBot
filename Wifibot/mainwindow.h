@@ -28,6 +28,11 @@ private slots:
 
     void on_Vitesse_valueChanged(int value);
 
+    void on_Right_triggered(QAction *arg1);//on appuie sur le bouton droite
+    void on_Down_triggered(QAction *arg1);//on appuie sur le bouton bas
+    void on_Up_triggered(QAction *arg1);//on appuie sur le bouton haut
+    void on_Left_triggered(QAction *arg1);//on appuie sur le bouton gauche
+
 private:
     Ui::MainWindow *ui;
     Network n;
