@@ -28,6 +28,8 @@ private slots:
 
     void on_Vitesse_valueChanged(int value);
 
+    void on_Right_triggered(QAction *arg1);
+    
 private:
     Ui::MainWindow *ui;
     Network n;

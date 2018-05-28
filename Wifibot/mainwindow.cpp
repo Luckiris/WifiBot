@@ -13,12 +13,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_buttonConnect_clicked()
+void MainWindow::on_Se_connecter_clicked()
 {
     n.DoConnect();
 }
 
-void MainWindow::on_pushButton_clicked()//bouton avance
+void MainWindow::on_Avance_clicked()//bouton avance
 {
     char* msg[7];
     char* msg_[9];
@@ -42,7 +42,7 @@ void MainWindow::on_pushButton_clicked()//bouton avance
     //n.SendMessage(msg_);
 }
 
-void MainWindow::on_pushButton_2_clicked()//bouton stop
+void MainWindow::on_Stop_clicked()//bouton stop
 {
     char* msg[7];
     char* msg_[9];
@@ -66,7 +66,7 @@ void MainWindow::on_pushButton_2_clicked()//bouton stop
     //n.SendMessage(msg_);
 }
 
-void MainWindow::on_pushButton_3_clicked()//bouton deco
+void MainWindow::on_Se_deconnecter_clicked()//bouton deco
 {
     n.DoDisconnect();
 }
@@ -91,4 +91,29 @@ short MainWindow::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
         }
     }
     return(Crc);
+}
+
+void MainWindow::on_Vitesse_valueChanged(int value)
+{
+
+}
+
+void MainWindow::on_Right_triggered(QAction *arg1)//on appuie sur le bouton droite
+{
+
+}
+
+void MainWindow::on_Down_triggered(QAction *arg1)//on appuie sur le bouton bas
+{
+
+}
+
+void MainWindow::on_Up_triggered(QAction *arg1)//on appuie sur le bouton haut
+{
+
+}
+
+void MainWindow::on_Left_triggered(QAction *arg1)//on appuie sur le bouton gauche
+{
+
 }
