@@ -31,7 +31,7 @@ public:
 //    int OdometryR;
 //    QChar Current;
 //    QChar Version;
-    Message(int turnLeft, int turnRight, int speedLeft, int speedRight);
+    Message(int speedLeft, int speedRight);
     QByteArray GetData();
     void SetData(QString newData);
     void Left();

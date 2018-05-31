@@ -10,9 +10,10 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -21,6 +22,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -29,15 +31,20 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QPushButton *Se_connecter;
-    QPushButton *Avance;
-    QPushButton *Stop;
-    QPushButton *Se_deconnecter;
-    QSlider *Vitesse;
+    QWidget *gridLayoutWidget;
+    QGridLayout *gridLayout;
+    QToolButton *Left;
+    QToolButton *Down;
     QToolButton *Right;
     QToolButton *Up;
-    QToolButton *Down;
-    QToolButton *Left;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout;
+    QPushButton *Se_connecter;
+    QPushButton *Se_deconnecter;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout;
+    QSlider *Rotationalite;
+    QSlider *Vitesse;
     QMenuBar *menuBar;
     QMenu *menuWifiBot_Controller;
     QToolBar *mainToolBar;
@@ -50,46 +57,78 @@ public:
         MainWindow->resize(1261, 633);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        Se_connecter = new QPushButton(centralWidget);
-        Se_connecter->setObjectName(QStringLiteral("Se_connecter"));
-        Se_connecter->setGeometry(QRect(580, 440, 93, 28));
-        Avance = new QPushButton(centralWidget);
-        Avance->setObjectName(QStringLiteral("Avance"));
-        Avance->setGeometry(QRect(430, 440, 89, 25));
-        Stop = new QPushButton(centralWidget);
-        Stop->setObjectName(QStringLiteral("Stop"));
-        Stop->setGeometry(QRect(430, 490, 89, 25));
-        Se_deconnecter = new QPushButton(centralWidget);
-        Se_deconnecter->setObjectName(QStringLiteral("Se_deconnecter"));
-        Se_deconnecter->setGeometry(QRect(580, 490, 89, 25));
-        Vitesse = new QSlider(centralWidget);
-        Vitesse->setObjectName(QStringLiteral("Vitesse"));
-        Vitesse->setGeometry(QRect(310, 370, 16, 160));
-        Vitesse->setOrientation(Qt::Vertical);
-        Right = new QToolButton(centralWidget);
-        Right->setObjectName(QStringLiteral("Right"));
-        Right->setGeometry(QRect(620, 270, 24, 23));
-        QIcon icon;
-        icon.addFile(QStringLiteral("../../../../Images/arrows/Right_Arrow.png"), QSize(), QIcon::Normal, QIcon::Off);
-        Right->setIcon(icon);
-        Up = new QToolButton(centralWidget);
-        Up->setObjectName(QStringLiteral("Up"));
-        Up->setGeometry(QRect(570, 220, 26, 24));
-        QIcon icon1;
-        icon1.addFile(QStringLiteral("../../../../Images/arrows/Up_Arrow.png"), QSize(), QIcon::Normal, QIcon::Off);
-        Up->setIcon(icon1);
-        Down = new QToolButton(centralWidget);
-        Down->setObjectName(QStringLiteral("Down"));
-        Down->setGeometry(QRect(570, 270, 26, 24));
-        QIcon icon2;
-        icon2.addFile(QStringLiteral("../../../../Images/arrows/Down_Arrow.png"), QSize(), QIcon::Normal, QIcon::Off);
-        Down->setIcon(icon2);
-        Left = new QToolButton(centralWidget);
+        gridLayoutWidget = new QWidget(centralWidget);
+        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
+        gridLayoutWidget->setGeometry(QRect(659, 319, 171, 91));
+        gridLayout = new QGridLayout(gridLayoutWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
+        Left = new QToolButton(gridLayoutWidget);
         Left->setObjectName(QStringLiteral("Left"));
-        Left->setGeometry(QRect(520, 270, 26, 24));
-        QIcon icon3;
-        icon3.addFile(QStringLiteral("../../../../Images/arrows/Left_Arrow.png"), QSize(), QIcon::Normal, QIcon::Off);
-        Left->setIcon(icon3);
+        Left->setStyleSheet(QStringLiteral("border-image: url(:/Images/images/Left_Arrow.png);"));
+
+        gridLayout->addWidget(Left, 1, 0, 1, 1);
+
+        Down = new QToolButton(gridLayoutWidget);
+        Down->setObjectName(QStringLiteral("Down"));
+        Down->setStyleSheet(QStringLiteral("border-image: url(:/Images/images/Down_Arrow.png);"));
+
+        gridLayout->addWidget(Down, 1, 1, 1, 1);
+
+        Right = new QToolButton(gridLayoutWidget);
+        Right->setObjectName(QStringLiteral("Right"));
+        Right->setStyleSheet(QStringLiteral("border-image: url(:/Images/images/Right_Arrow.png);"));
+
+        gridLayout->addWidget(Right, 1, 2, 1, 1);
+
+        Up = new QToolButton(gridLayoutWidget);
+        Up->setObjectName(QStringLiteral("Up"));
+        Up->setStyleSheet(QStringLiteral("border-image: url(:/Images/images/Up_Arrow.png);"));
+        Up->setAutoRepeatDelay(1);
+        Up->setAutoRepeatInterval(1);
+
+        gridLayout->addWidget(Up, 0, 1, 1, 1);
+
+        verticalLayoutWidget = new QWidget(centralWidget);
+        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
+        verticalLayoutWidget->setGeometry(QRect(659, 409, 171, 91));
+        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        Se_connecter = new QPushButton(verticalLayoutWidget);
+        Se_connecter->setObjectName(QStringLiteral("Se_connecter"));
+
+        verticalLayout->addWidget(Se_connecter);
+
+        Se_deconnecter = new QPushButton(verticalLayoutWidget);
+        Se_deconnecter->setObjectName(QStringLiteral("Se_deconnecter"));
+
+        verticalLayout->addWidget(Se_deconnecter);
+
+        horizontalLayoutWidget = new QWidget(centralWidget);
+        horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(540, 320, 121, 181));
+        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        Rotationalite = new QSlider(horizontalLayoutWidget);
+        Rotationalite->setObjectName(QStringLiteral("Rotationalite"));
+        Rotationalite->setOrientation(Qt::Vertical);
+
+        horizontalLayout->addWidget(Rotationalite);
+
+        Vitesse = new QSlider(horizontalLayoutWidget);
+        Vitesse->setObjectName(QStringLiteral("Vitesse"));
+        Vitesse->setOrientation(Qt::Vertical);
+
+        horizontalLayout->addWidget(Vitesse);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -114,10 +153,14 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        Se_connecter->setText(QApplication::translate("MainWindow", "Se connecter", nullptr));
-        Avance->setText(QApplication::translate("MainWindow", "Avance", nullptr));
-        Stop->setText(QApplication::translate("MainWindow", "Stop", nullptr));
-        Se_deconnecter->setText(QApplication::translate("MainWindow", "Se deconnecter", nullptr));
+        Left->setText(QApplication::translate("MainWindow", "...", nullptr));
+#ifndef QT_NO_SHORTCUT
+        Left->setShortcut(QApplication::translate("MainWindow", "Left", nullptr));
+#endif // QT_NO_SHORTCUT
+        Down->setText(QApplication::translate("MainWindow", "...", nullptr));
+#ifndef QT_NO_SHORTCUT
+        Down->setShortcut(QApplication::translate("MainWindow", "Down", nullptr));
+#endif // QT_NO_SHORTCUT
         Right->setText(QApplication::translate("MainWindow", "...", nullptr));
 #ifndef QT_NO_SHORTCUT
         Right->setShortcut(QApplication::translate("MainWindow", "Right", nullptr));
@@ -126,14 +169,8 @@ public:
 #ifndef QT_NO_SHORTCUT
         Up->setShortcut(QApplication::translate("MainWindow", "Up", nullptr));
 #endif // QT_NO_SHORTCUT
-        Down->setText(QApplication::translate("MainWindow", "...", nullptr));
-#ifndef QT_NO_SHORTCUT
-        Down->setShortcut(QApplication::translate("MainWindow", "Down", nullptr));
-#endif // QT_NO_SHORTCUT
-        Left->setText(QApplication::translate("MainWindow", "...", nullptr));
-#ifndef QT_NO_SHORTCUT
-        Left->setShortcut(QApplication::translate("MainWindow", "Left", nullptr));
-#endif // QT_NO_SHORTCUT
+        Se_connecter->setText(QApplication::translate("MainWindow", "Se connecter", nullptr));
+        Se_deconnecter->setText(QApplication::translate("MainWindow", "Se deconnecter", nullptr));
         menuWifiBot_Controller->setTitle(QApplication::translate("MainWindow", "WifiBot Controller", nullptr));
     } // retranslateUi
 

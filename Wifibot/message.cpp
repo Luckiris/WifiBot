@@ -2,10 +2,8 @@
 #include <QString>
 #include <QDebug>
 
-Message::Message(int turnLeft, int turnRight, int speedLeft, int speedRight)
+Message::Message(int speedLeft, int speedRight)
 {
-    this->turnLeft = turnLeft;
-    this->turnRight = turnRight;
     this->speedLeft = speedLeft;
     this->speedRight = speedRight;
 }
@@ -41,21 +39,23 @@ short Message::GetChar7(){
 }
 
 void Message::Left(){
-    speedLeft -= turnLeft;
+    reverseLeft = false;
+    reverseRight = true;
 }
 
 void Message::Right(){
-    speedRight += turnRight;
+    reverseRight = false;
+    reverseLeft = true;
 }
 
 void Message::Forward(){
-    reverseLeft = false;
-    reverseRight = false;
+    reverseLeft = true;
+    reverseRight = true;
 }
 
 void Message::Reverse(){
-    reverseLeft = true;
-    reverseRight = true;
+    reverseLeft = false;
+    reverseRight = false;
 }
 
 void Message::ReadToRaw(int SpeedLeft, int SpeedRight, int sensLeft, int sensRight){

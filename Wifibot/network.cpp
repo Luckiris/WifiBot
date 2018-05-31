@@ -49,12 +49,10 @@ void Network::readyRead(){
 }
 
 void Network::SendMessages(){
-    Message message(10, 10, 10, 10);
-    while(!this->listMessagesToSend.isEmpty()){
-        message = this->listMessagesToSend.first();
-        message.BuildMessage();
+    Message message(0, 0);
+    for (int i = 0; i < this->listMessagesToSend.length(); i++){
+        message = this->listMessagesToSend.at(i);
         this->socket->write(message.GetData());
-        this->listMessagesToSend.removeFirst();
     }
 }
 
