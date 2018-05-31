@@ -14,19 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="Se_connecter">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>440</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Se connecter</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Avance">
     <property name="geometry">
      <rect>
@@ -53,111 +40,112 @@
      <string>Stop</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Se_deconnecter">
+   <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>490</y>
-      <width>89</width>
-      <height>25</height>
+      <x>659</x>
+      <y>319</y>
+      <width>171</width>
+      <height>91</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Se deconnecter</string>
-    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QToolButton" name="Left">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="shortcut">
+        <string>Left</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QToolButton" name="Down">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="shortcut">
+        <string>Down</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QToolButton" name="Right">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="shortcut">
+        <string>Right</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QToolButton" name="Up">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="shortcut">
+        <string>Up</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
-   <widget class="QSlider" name="Vitesse">
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>370</y>
-      <width>16</width>
-      <height>160</height>
+      <x>659</x>
+      <y>409</y>
+      <width>171</width>
+      <height>91</height>
      </rect>
     </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="Se_connecter">
+       <property name="text">
+        <string>Se connecter</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Se_deconnecter">
+       <property name="text">
+        <string>Se deconnecter</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
-   <widget class="QToolButton" name="Right">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>270</y>
-      <width>24</width>
-      <height>23</height>
+      <x>540</x>
+      <y>320</y>
+      <width>121</width>
+      <height>181</height>
      </rect>
     </property>
-    <property name="text">
-     <string>...</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../../../../Images/arrows/Right_Arrow.png</normaloff>../../../../Images/arrows/Right_Arrow.png</iconset>
-    </property>
-    <property name="shortcut">
-     <string>Right</string>
-    </property>
-   </widget>
-   <widget class="QToolButton" name="Up">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>220</y>
-      <width>26</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>...</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../../../../Images/arrows/Up_Arrow.png</normaloff>../../../../Images/arrows/Up_Arrow.png</iconset>
-    </property>
-    <property name="shortcut">
-     <string>Up</string>
-    </property>
-   </widget>
-   <widget class="QToolButton" name="Down">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>270</y>
-      <width>26</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>...</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../../../../Images/arrows/Down_Arrow.png</normaloff>../../../../Images/arrows/Down_Arrow.png</iconset>
-    </property>
-    <property name="shortcut">
-     <string>Down</string>
-    </property>
-   </widget>
-   <widget class="QToolButton" name="Left">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>270</y>
-      <width>26</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>...</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../../../../Images/arrows/Left_Arrow.png</normaloff>../../../../Images/arrows/Left_Arrow.png</iconset>
-    </property>
-    <property name="shortcut">
-     <string>Left</string>
-    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QSlider" name="Rotationalite">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="Vitesse">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -166,7 +154,7 @@
      <x>0</x>
      <y>0</y>
      <width>1261</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuWifiBot_Controller">
