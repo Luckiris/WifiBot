@@ -58,37 +58,6 @@ void Message::Reverse(){
     reverseRight = false;
 }
 
-void Message::ReadToRaw(int SpeedLeft, int SpeedRight, int sensLeft, int sensRight){
-//    int char7=248;
-//    Data[2]=(char) SpeedLeft;//vitesse de gauche 0 -> 240
-//    Data[4]=(char) SpeedRight;//vit de droite 0 -> 240
-//    if(sensLeft==-1){
-//        char7=char7-64;
-//    }
-//    if(sensRight==-1){
-//        char7=char7-16;
-//    }
-//    Data[6]=char7;//[255,0x07,240,0,240,0,248,0,0]
-}
-
-void Message::RawToRead(int Raw[]){
-//    SpeedL=(int)((Raw[1]<<8) + Raw[0]);
-//    if (SpeedL > 32767) SpeedL=SpeedL-65536;
-//    BatLevel=Raw[2];
-//    IR1L=Raw[3];
-//    IR2L=Raw[4];
-//    OdometryL=((((long)Raw[8] << 24))+(((long)Raw[7] <<
-//    16))+(((long)Raw[6] << 8))+((long)Raw[5]));
-//    SpeedR=(int)(Raw[10] << 8) + Raw[9];
-//    if (SpeedR > 32767) SpeedR=SpeedR-65536;
-//    IR1R=Raw[11];
-//    IR2R=Raw[12];
-//    OdometryR=((((long)Raw[16] << 24))+(((long)Raw[15] <<
-//    16))+(((long)Raw[14] << 8))+((long)Raw[13]));
-//    Current=Raw[17];
-//    Version=Raw[18];
-}
-
 short Message::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
 {
     unsigned int Crc = 0xFFFF;
@@ -113,8 +82,4 @@ short Message::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
 
 QByteArray Message::GetData(){
     return data;
-}
-
-void Message::SetData(QString newData){
-    this->data.append(newData);
 }

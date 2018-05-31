@@ -5,14 +5,6 @@ Network::Network(QObject *parent, QString ip, int port): QObject(parent){
     this->port = port;
 }
 
-void Network::AddMessage(Message m){
-    listMessagesToSend.append(m);
-}
-
-void Network::ClearList(){
-    listMessagesToSend.clear();
-}
-
 void Network::DoConnect(){
     this->socket = new QTcpSocket(this);
     this->connect(this->socket, SIGNAL(connected()),this, SLOT(connected()));
@@ -48,14 +40,6 @@ void Network::readyRead(){
     qDebug() << socket->readAll();
 }
 
-void Network::SendMessages(){
-    Message message(0, 0);
-    for (int i = 0; i < this->listMessagesToSend.length(); i++){
-        message = this->listMessagesToSend.at(i);
-        this->socket->write(message.GetData());
-    }
-}
-
-bool Network::IsSendListEmpty(){
-    return this->listMessagesToSend.isEmpty();
+void Network::SendMessage(Message message){
+    this->socket->write(message.GetData());
 }

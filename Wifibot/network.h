@@ -13,19 +13,14 @@ class Network : public QObject
 {
     Q_OBJECT
 private:
-    QList<Message> listMessagesToSend;
-    QList<Message> listMessagesReceived;
     QString ip;
     int port;
     QTcpSocket *socket;
 public:
     Network(QObject *parent = 0, QString ip = "0.0.0.0", int port = 0);
-    void AddMessage(Message m);
-    void ClearList();
     void DoConnect();
     void DoDisconnect();
-    void SendMessages();
-    bool IsSendListEmpty();
+    void SendMessage(Message message);
 
 public slots:
     void connected();

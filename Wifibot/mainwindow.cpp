@@ -57,40 +57,30 @@ void MainWindow::updateTimer(){
         Message m(240 ,240);
         m.Forward();
         m.BuildMessage();
-        network->AddMessage(m);
-        network->SendMessages();
-        network->ClearList();
+        network->SendMessage(m);
     }
     else if (down){
         Message m(240 ,240);
         m.Reverse();
         m.BuildMessage();
-        network->AddMessage(m);
-        network->SendMessages();
-        network->ClearList();
+        network->SendMessage(m);
     }
     else if (left){
         Message m(240 ,240);
         m.Left();
         m.BuildMessage();
-        network->AddMessage(m);
-        network->SendMessages();
-        network->ClearList();
+        network->SendMessage(m);
     }
     else if (right){
         Message m(240 ,240);
         m.Right();
         m.BuildMessage();
-        network->AddMessage(m);
-        network->SendMessages();
-        network->ClearList();
+        network->SendMessage(m);
     }
     else {
         Message m(0 ,0);
         m.BuildMessage();
-        network->AddMessage(m);
-        network->SendMessages();
-        network->ClearList();
+        network->SendMessage(m);
     }
 }
 
