@@ -125,3 +125,23 @@ void MainWindow::updateTimer(){
         network->SendMessages();
     }
 }
+
+void MainWindow::on_Up_released()
+{
+
+}
+
+void MainWindow::on_Right_released()
+{
+
+}
+
+void MainWindow::on_Down_released()
+{
+
+}
+
+void MainWindow::on_Left_released()
+{
+
+}

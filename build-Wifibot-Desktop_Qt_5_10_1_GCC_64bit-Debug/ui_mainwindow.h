@@ -77,21 +77,25 @@ public:
         gridLayout->setContentsMargins(0, 0, 0, 0);
         Left = new QToolButton(gridLayoutWidget);
         Left->setObjectName(QStringLiteral("Left"));
+        Left->setStyleSheet(QStringLiteral("border-image: url(:/Images/images/Left_Arrow.png);"));
 
         gridLayout->addWidget(Left, 1, 0, 1, 1);
 
         Down = new QToolButton(gridLayoutWidget);
         Down->setObjectName(QStringLiteral("Down"));
+        Down->setStyleSheet(QStringLiteral("border-image: url(:/Images/images/Down_Arrow.png);"));
 
         gridLayout->addWidget(Down, 1, 1, 1, 1);
 
         Right = new QToolButton(gridLayoutWidget);
         Right->setObjectName(QStringLiteral("Right"));
+        Right->setStyleSheet(QStringLiteral("border-image: url(:/Images/images/Right_Arrow.png);"));
 
         gridLayout->addWidget(Right, 1, 2, 1, 1);
 
         Up = new QToolButton(gridLayoutWidget);
         Up->setObjectName(QStringLiteral("Up"));
+        Up->setStyleSheet(QStringLiteral("border-image: url(:/Images/images/Up_Arrow.png);"));
 
         gridLayout->addWidget(Up, 0, 1, 1, 1);
 

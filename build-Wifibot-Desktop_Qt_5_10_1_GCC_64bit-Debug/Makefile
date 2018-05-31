@@ -53,12 +53,14 @@ OBJECTS_DIR   = ./
 SOURCES       = ../Wifibot/main.cpp \
 		../Wifibot/mainwindow.cpp \
 		../Wifibot/message.cpp \
-		../Wifibot/network.cpp moc_mainwindow.cpp \
+		../Wifibot/network.cpp qrc_ressource.cpp \
+		moc_mainwindow.cpp \
 		moc_network.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		message.o \
 		network.o \
+		qrc_ressource.o \
 		moc_mainwindow.o \
 		moc_network.o
 DIST          = ../../../../Qt/5.10.1/gcc_64/mkspecs/features/spec_pre.prf \
@@ -224,6 +226,7 @@ DIST          = ../../../../Qt/5.10.1/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/spec_post.prf \
+		../Wifibot/.qmake.stash \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -423,6 +426,7 @@ Makefile: ../Wifibot/Wifibot.pro ../../../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -443,6 +447,7 @@ Makefile: ../Wifibot/Wifibot.pro ../../../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/yacc.prf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/lex.prf \
 		../Wifibot/Wifibot.pro \
+		../Wifibot/ressource.qrc \
 		../../../../Qt/5.10.1/gcc_64/lib/libQt5Widgets.prl \
 		../../../../Qt/5.10.1/gcc_64/lib/libQt5Gui.prl \
 		../../../../Qt/5.10.1/gcc_64/lib/libQt5Network.prl \
@@ -611,6 +616,7 @@ Makefile: ../Wifibot/Wifibot.pro ../../../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/
 ../../../../Qt/5.10.1/gcc_64/mkspecs/features/qt_config.prf:
 ../../../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../../Qt/5.10.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../Qt/5.10.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../../Qt/5.10.1/gcc_64/mkspecs/features/toolchain.prf:
 ../../../../Qt/5.10.1/gcc_64/mkspecs/features/default_pre.prf:
@@ -631,6 +637,7 @@ Makefile: ../Wifibot/Wifibot.pro ../../../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/
 ../../../../Qt/5.10.1/gcc_64/mkspecs/features/yacc.prf:
 ../../../../Qt/5.10.1/gcc_64/mkspecs/features/lex.prf:
 ../Wifibot/Wifibot.pro:
+../Wifibot/ressource.qrc:
 ../../../../Qt/5.10.1/gcc_64/lib/libQt5Widgets.prl:
 ../../../../Qt/5.10.1/gcc_64/lib/libQt5Gui.prl:
 ../../../../Qt/5.10.1/gcc_64/lib/libQt5Network.prl:
@@ -649,6 +656,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../Wifibot/ressource.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Wifibot/mainwindow.h ../Wifibot/message.h ../Wifibot/network.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Wifibot/main.cpp ../Wifibot/mainwindow.cpp ../Wifibot/message.cpp ../Wifibot/network.cpp $(DISTDIR)/
@@ -676,8 +684,17 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_ressource.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_ressource.cpp
+qrc_ressource.cpp: ../Wifibot/ressource.qrc \
+		../../../../Qt/5.10.1/gcc_64/bin/rcc \
+		../Wifibot/images/Down_Arrow.png \
+		../Wifibot/images/Right_Arrow.png \
+		../Wifibot/images/Left_Arrow.png \
+		../Wifibot/images/Up_Arrow.png
+	/home/adrien/Qt/5.10.1/gcc_64/bin/rcc -name ressource ../Wifibot/ressource.qrc -o qrc_ressource.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -928,7 +945,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -1187,7 +1204,59 @@ mainwindow.o: ../Wifibot/mainwindow.cpp ../Wifibot/mainwindow.h \
 		../../../../Qt/5.10.1/gcc_64/include/QtCore/QTimer \
 		../../../../Qt/5.10.1/gcc_64/include/QtCore/qtimer.h \
 		../../../../Qt/5.10.1/gcc_64/include/QtCore/qbasictimer.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QGridLayout \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QMenu \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QSlider \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QStatusBar \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QToolBar \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qtoolbar.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QToolButton \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/qtoolbutton.h \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../../../../Qt/5.10.1/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Wifibot/mainwindow.cpp
 
 message.o: ../Wifibot/message.cpp ../Wifibot/message.h \
@@ -1353,6 +1422,9 @@ network.o: ../Wifibot/network.cpp ../Wifibot/network.h \
 		../Wifibot/message.h \
 		../../../../Qt/5.10.1/gcc_64/include/QtCore/QChar
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o network.o ../Wifibot/network.cpp
+
+qrc_ressource.o: qrc_ressource.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_ressource.o qrc_ressource.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

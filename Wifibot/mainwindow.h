@@ -41,6 +41,14 @@ private slots:
 
     void updateTimer();
 
+    void on_Up_released();
+
+    void on_Right_released();
+
+    void on_Down_released();
+
+    void on_Left_released();
+
 private:
     Ui::MainWindow *ui;
     Network *network;
