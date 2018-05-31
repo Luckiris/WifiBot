@@ -2,38 +2,60 @@
 #include <QString>
 #include <QDebug>
 
-Message::Message()
+Message::Message(int turnLeft, int turnRight, int speedLeft, int speedRight)
 {
-//    static char* Data[9] = { '255', '0x07','0', '0', '0', '0', '0', 0x00, 0x00 };//chaine de donné brute
-//    //static QChar Raw[21]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-//    static int SpeedL=0;
-//    static int SpeedR=0;
-//    static QChar BatLevel=0;
-//    static QChar IR1L=0;
-//    static QChar IR2L=0;
-//    static int OdometryL=0;
-//    static QChar IR1R=0;
-//    static QChar IR2R=0;
-//    static int OdometryR=0;
-//    static QChar Current=0;
-//    static QChar Version=0;
-    data.append(255); // char 1
-    data.append(0x07); // char 2
-    data.append(120); // char 3
-    data.append((char)0); // char 4
-    data.append(120); // char 5
-    data.append((char)0); // char 6
-    data.append(80); // char 7
+    this->turnLeft = turnLeft;
+    this->turnRight = turnRight;
+    this->speedLeft = speedLeft;
+    this->speedRight = speedRight;
+}
+
+void Message::BuildMessage(){
+    data.append(255);
+    data.append(0x07);
+    data.append(speedLeft);
+    data.append((char)0);
+    data.append(speedRight);
+    data.append((char)0);
+    data.append(GetChar7());
     QByteArray data2;
-    data2.append(0x07); // char 2
-    data2.append(120); // char 3
-    data2.append((char)0); // char 4
-    data2.append(120); // char 5
-    data2.append((char)0); // char 6
-    data2.append(80); // char 7
+    data2.append(0x07);
+    data2.append(speedLeft);
+    data2.append((char)0);
+    data2.append(speedRight);
+    data2.append((char)0);
+    data2.append(GetChar7());
     short calcul = Crc16((unsigned char*)data2.constData(), data2.length());
     data.append(calcul);
     data.append(calcul>>8);
+}
+
+short Message::GetChar7(){
+    short resultat;
+    resultat += 128;
+    if (reverseLeft) resultat += 64;
+    resultat += 32;
+    if (reverseRight) resultat += 16;
+    resultat += 8;
+    return resultat;
+}
+
+void Message::Left(){
+    speedLeft -= turnLeft;
+}
+
+void Message::Right(){
+    speedRight += turnRight;
+}
+
+void Message::Forward(){
+    reverseLeft = false;
+    reverseRight = false;
+}
+
+void Message::Reverse(){
+    reverseLeft = true;
+    reverseRight = true;
 }
 
 void Message::ReadToRaw(int SpeedLeft, int SpeedRight, int sensLeft, int sensRight){
@@ -91,4 +113,8 @@ short Message::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
 
 QByteArray Message::GetData(){
     return data;
+}
+
+void Message::SetData(QString newData){
+    this->data.append(newData);
 }

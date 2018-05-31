@@ -7,23 +7,25 @@
 #include <QTcpSocket>
 #include <QAbstractSocket>
 #include <QDebug>
+#include <message.h>
 
 class Network : public QObject
 {
     Q_OBJECT
 private:
-    //QList<Message> listMessagesToSend;
-    //QList<Message> listMessagesReceived;
+    QList<Message> listMessagesToSend;
+    QList<Message> listMessagesReceived;
     QString ip;
     int port;
     QTcpSocket *socket;
 public:
     Network(QObject *parent = 0, QString ip = "0.0.0.0", int port = 0);
-    //void AddMessage(Message m);
+    void AddMessage(Message m);
     void ClearList();
     void DoConnect();
     void DoDisconnect();
-    void SendMessage(QByteArray msg);
+    void SendMessages();
+    bool IsSendListEmpty();
 
 public slots:
     void connected();

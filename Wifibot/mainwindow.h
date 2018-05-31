@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "network.h"
 #include "message.h"
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -28,14 +29,22 @@ private slots:
 
     void on_Vitesse_valueChanged(int value);
 
-    void on_Right_triggered(QAction *arg1);//on appuie sur le bouton droite
-    void on_Down_triggered(QAction *arg1);//on appuie sur le bouton bas
-    void on_Up_triggered(QAction *arg1);//on appuie sur le bouton haut
-    void on_Left_triggered(QAction *arg1);//on appuie sur le bouton gauche
+    void on_Right_triggered(QAction *arg1);
+    
+    void on_Down_triggered(QAction *arg1);
+    
+    void on_Up_triggered(QAction *arg1);
+    
+    void on_Left_triggered(QAction *arg1);
+    
+    void on_Up_pressed();
+
+    void updateTimer();
 
 private:
     Ui::MainWindow *ui;
-    Network n;
+    Network *network;
+    QTimer *timer;
     short Crc16(unsigned char *Adresse_tab , unsigned char Taille_max);
 };
 

@@ -15,13 +15,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_Se_connecter_clicked()
 {
-    n.DoConnect();
+    network = new Network(this, "192.168.1.40", 15020);
+    network->DoConnect();
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
+    timer->start(25);
 }
 
 void MainWindow::on_Avance_clicked()//bouton avance
 {
-    Message m;
-    n.SendMessage(m.GetData());
+    Message m(10, 10, 10 ,10);
+    m.Forward();
+    m.BuildMessage();
+    network->AddMessage(m);
+    qDebug() << m.GetData(); // Debug
 }
 
 void MainWindow::on_Stop_clicked()//bouton stop
@@ -50,7 +57,10 @@ void MainWindow::on_Stop_clicked()//bouton stop
 
 void MainWindow::on_Se_deconnecter_clicked()//bouton deco
 {
-    n.DoDisconnect();
+    timer->stop();
+    delete timer;
+    network->DoDisconnect();
+    delete network;
 }
 
 short MainWindow::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
@@ -92,11 +102,26 @@ void MainWindow::on_Down_triggered(QAction *arg1)//on appuie sur le bouton bas
 
 void MainWindow::on_Up_triggered(QAction *arg1)//on appuie sur le bouton haut
 {
-    Message m;
-    n.SendMessage(m.GetData());
+
 }
 
 void MainWindow::on_Left_triggered(QAction *arg1)//on appuie sur le bouton gauche
 {
 
+}
+
+void MainWindow::on_Up_pressed()
+{
+}
+
+void MainWindow::updateTimer(){
+    if (!network->IsSendListEmpty()){
+        network->SendMessages();
+    }
+    else {
+        for (int i = 0; i < 10; i++){
+            network->AddMessage(Message(10, 10 ,10 ,10));
+        }
+        network->SendMessages();
+    }
 }
