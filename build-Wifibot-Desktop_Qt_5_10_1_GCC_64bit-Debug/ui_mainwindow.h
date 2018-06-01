@@ -33,8 +33,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QPushButton *Avance;
-    QPushButton *Stop;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
     QToolButton *Left;
@@ -61,12 +59,6 @@ public:
         MainWindow->resize(1261, 633);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        Avance = new QPushButton(centralWidget);
-        Avance->setObjectName(QStringLiteral("Avance"));
-        Avance->setGeometry(QRect(430, 440, 89, 25));
-        Stop = new QPushButton(centralWidget);
-        Stop->setObjectName(QStringLiteral("Stop"));
-        Stop->setGeometry(QRect(430, 490, 89, 25));
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
         gridLayoutWidget->setGeometry(QRect(659, 319, 171, 91));
@@ -96,6 +88,8 @@ public:
         Up = new QToolButton(gridLayoutWidget);
         Up->setObjectName(QStringLiteral("Up"));
         Up->setStyleSheet(QStringLiteral("border-image: url(:/Images/images/Up_Arrow.png);"));
+        Up->setAutoRepeatDelay(1);
+        Up->setAutoRepeatInterval(1);
 
         gridLayout->addWidget(Up, 0, 1, 1, 1);
 
@@ -140,7 +134,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1261, 22));
+        menuBar->setGeometry(QRect(0, 0, 1261, 26));
         menuWifiBot_Controller = new QMenu(menuBar);
         menuWifiBot_Controller->setObjectName(QStringLiteral("menuWifiBot_Controller"));
         MainWindow->setMenuBar(menuBar);
@@ -161,8 +155,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        Avance->setText(QApplication::translate("MainWindow", "Avance", nullptr));
-        Stop->setText(QApplication::translate("MainWindow", "Stop", nullptr));
         Left->setText(QApplication::translate("MainWindow", "...", nullptr));
 #ifndef QT_NO_SHORTCUT
         Left->setShortcut(QApplication::translate("MainWindow", "Left", nullptr));

@@ -53,9 +53,41 @@ void MainWindow::on_Vitesse_valueChanged(int value){
 }
 
 void MainWindow::updateTimer(){
-    if (up){
+    //===================UP
+    if (up && down){
+        Message m(0 ,0);
+        m.Forward();
+        m.BuildMessage();
+        network->SendMessage(m);
+    }
+    else if (up && left){
+        Message m(0 ,240);
+        m.Forward();
+        m.BuildMessage();
+        network->SendMessage(m);
+    }
+    else if (up && right){
+        Message m(240 ,0);
+        m.Forward();
+        m.BuildMessage();
+        network->SendMessage(m);
+    }
+    else if (up){
         Message m(240 ,240);
         m.Forward();
+        m.BuildMessage();
+        network->SendMessage(m);
+    }
+    //==================DOWN
+    else if (down && left){
+        Message m(240 ,0);
+        m.Reverse();
+        m.BuildMessage();
+        network->SendMessage(m);
+    }
+    else if (down && right){
+        Message m(0 ,240);
+        m.Reverse();
         m.BuildMessage();
         network->SendMessage(m);
     }
@@ -65,18 +97,27 @@ void MainWindow::updateTimer(){
         m.BuildMessage();
         network->SendMessage(m);
     }
+    //====================LEFT
+    else if (left && right){
+        Message m(0 ,0);
+        m.Forward();
+        m.BuildMessage();
+        network->SendMessage(m);
+    }
     else if (left){
         Message m(240 ,240);
         m.Left();
         m.BuildMessage();
         network->SendMessage(m);
     }
+    //=======================RIGHT
     else if (right){
         Message m(240 ,240);
         m.Right();
         m.BuildMessage();
         network->SendMessage(m);
     }
+    //=====================NOTHING
     else {
         Message m(0 ,0);
         m.BuildMessage();
@@ -86,14 +127,14 @@ void MainWindow::updateTimer(){
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_Z) up = true;
-    else if (event->key() == Qt::Key_S) down = true;
-    else if (event->key() == Qt::Key_Q) left = true;
-    else if (event->key() == Qt::Key_D) right = true;
+    if (event->key() == Qt::Key_S) down = true;
+    if (event->key() == Qt::Key_Q) left = true;
+    if (event->key() == Qt::Key_D) right = true;
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_Z) up = false;
-    else if (event->key() == Qt::Key_S) down = false;
-    else if (event->key() == Qt::Key_Q) left = false;
-    else if (event->key() == Qt::Key_D) right = false;
+    if (event->key() == Qt::Key_S) down = false;
+    if (event->key() == Qt::Key_Q) left = false;
+    if (event->key() == Qt::Key_D) right = false;
 }

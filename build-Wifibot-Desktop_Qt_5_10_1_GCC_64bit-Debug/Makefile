@@ -53,14 +53,12 @@ OBJECTS_DIR   = ./
 SOURCES       = ../Wifibot/main.cpp \
 		../Wifibot/mainwindow.cpp \
 		../Wifibot/message.cpp \
-		../Wifibot/network.cpp qrc_ressource.cpp \
-		moc_mainwindow.cpp \
+		../Wifibot/network.cpp moc_mainwindow.cpp \
 		moc_network.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		message.o \
 		network.o \
-		qrc_ressource.o \
 		moc_mainwindow.o \
 		moc_network.o
 DIST          = ../../../../Qt/5.10.1/gcc_64/mkspecs/features/spec_pre.prf \
@@ -447,7 +445,6 @@ Makefile: ../Wifibot/Wifibot.pro ../../../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/yacc.prf \
 		../../../../Qt/5.10.1/gcc_64/mkspecs/features/lex.prf \
 		../Wifibot/Wifibot.pro \
-		../Wifibot/ressource.qrc \
 		../../../../Qt/5.10.1/gcc_64/lib/libQt5Widgets.prl \
 		../../../../Qt/5.10.1/gcc_64/lib/libQt5Gui.prl \
 		../../../../Qt/5.10.1/gcc_64/lib/libQt5Network.prl \
@@ -637,7 +634,6 @@ Makefile: ../Wifibot/Wifibot.pro ../../../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/
 ../../../../Qt/5.10.1/gcc_64/mkspecs/features/yacc.prf:
 ../../../../Qt/5.10.1/gcc_64/mkspecs/features/lex.prf:
 ../Wifibot/Wifibot.pro:
-../Wifibot/ressource.qrc:
 ../../../../Qt/5.10.1/gcc_64/lib/libQt5Widgets.prl:
 ../../../../Qt/5.10.1/gcc_64/lib/libQt5Gui.prl:
 ../../../../Qt/5.10.1/gcc_64/lib/libQt5Network.prl:
@@ -656,7 +652,6 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Wifibot/ressource.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Wifibot/mainwindow.h ../Wifibot/message.h ../Wifibot/network.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Wifibot/main.cpp ../Wifibot/mainwindow.cpp ../Wifibot/message.cpp ../Wifibot/network.cpp $(DISTDIR)/
@@ -684,17 +679,8 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_ressource.cpp
+compiler_rcc_make_all:
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_ressource.cpp
-qrc_ressource.cpp: ../Wifibot/ressource.qrc \
-		../../../../Qt/5.10.1/gcc_64/bin/rcc \
-		../Wifibot/images/Down_Arrow.png \
-		../Wifibot/images/Right_Arrow.png \
-		../Wifibot/images/Left_Arrow.png \
-		../Wifibot/images/Up_Arrow.png
-	/home/adrien/Qt/5.10.1/gcc_64/bin/rcc -name ressource ../Wifibot/ressource.qrc -o qrc_ressource.cpp
-
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -945,7 +931,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -1422,9 +1408,6 @@ network.o: ../Wifibot/network.cpp ../Wifibot/network.h \
 		../Wifibot/message.h \
 		../../../../Qt/5.10.1/gcc_64/include/QtCore/QChar
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o network.o ../Wifibot/network.cpp
-
-qrc_ressource.o: qrc_ressource.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_ressource.o qrc_ressource.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

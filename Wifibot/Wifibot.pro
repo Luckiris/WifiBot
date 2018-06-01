@@ -37,5 +37,4 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-RESOURCES += \
-    ressource.qrc
+RESOURCES +=
