@@ -26,7 +26,7 @@ private:
     long odometrie_left;
 
 public:
-    Message(int speedLeft, int speedRight);
+    Message(int speedLeft = 0, int speedRight = 0);
     QByteArray GetData();
     void SetData(QByteArray data);
     void Left();
@@ -35,6 +35,7 @@ public:
     void Forward();
     void BuildMessage();
     void UnbuildMessage();
+    void ShowMessage();
 };
 
 #endif // MESSAGE_H

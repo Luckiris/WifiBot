@@ -29,7 +29,7 @@ void Message::BuildMessage(){
 }
 
 short Message::GetChar7(){
-    short resultat;
+    short resultat = 0;
     resultat += 128;
     if (reverseLeft) resultat += 64;
     resultat += 32;
@@ -105,4 +105,8 @@ void Message::UnbuildMessage(){
 
 void Message::SetData(QByteArray data){
     this->data = data;
+}
+
+void Message::ShowMessage(){
+    qDebug() << "IR gauche : " << ir_left;
 }
