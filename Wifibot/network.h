@@ -16,11 +16,13 @@ private:
     QString ip;
     int port;
     QTcpSocket *socket;
+    Message messageReceived;
 public:
-    Network(QObject *parent = 0, QString ip = "0.0.0.0", int port = 0);
+    Network(QObject *parent, QString ip, int port);
     void DoConnect();
     void DoDisconnect();
     void SendMessage(Message message);
+    Message GetMessage();
 
 public slots:
     void connected();

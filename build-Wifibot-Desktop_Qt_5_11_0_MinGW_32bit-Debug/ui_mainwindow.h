@@ -14,6 +14,8 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -39,12 +41,16 @@ public:
     QToolButton *Up;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
+    QLabel *label_ip;
+    QLineEdit *entry_ip;
+    QLabel *label_port;
+    QLineEdit *entry_port;
     QPushButton *Se_connecter;
     QPushButton *Se_deconnecter;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
-    QSlider *Rotationalite;
     QSlider *Vitesse;
+    QLabel *label;
     QMenuBar *menuBar;
     QMenu *menuWifiBot_Controller;
     QToolBar *mainToolBar;
@@ -59,7 +65,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(659, 319, 171, 91));
+        gridLayoutWidget->setGeometry(QRect(870, 180, 171, 91));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -93,12 +99,32 @@ public:
 
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(659, 409, 171, 91));
+        verticalLayoutWidget->setGeometry(QRect(870, 300, 171, 201));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
+        label_ip = new QLabel(verticalLayoutWidget);
+        label_ip->setObjectName(QStringLiteral("label_ip"));
+
+        verticalLayout->addWidget(label_ip);
+
+        entry_ip = new QLineEdit(verticalLayoutWidget);
+        entry_ip->setObjectName(QStringLiteral("entry_ip"));
+
+        verticalLayout->addWidget(entry_ip);
+
+        label_port = new QLabel(verticalLayoutWidget);
+        label_port->setObjectName(QStringLiteral("label_port"));
+
+        verticalLayout->addWidget(label_port);
+
+        entry_port = new QLineEdit(verticalLayoutWidget);
+        entry_port->setObjectName(QStringLiteral("entry_port"));
+
+        verticalLayout->addWidget(entry_port);
+
         Se_connecter = new QPushButton(verticalLayoutWidget);
         Se_connecter->setObjectName(QStringLiteral("Se_connecter"));
 
@@ -111,24 +137,23 @@ public:
 
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(540, 320, 121, 181));
+        horizontalLayoutWidget->setGeometry(QRect(770, 300, 86, 231));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        Rotationalite = new QSlider(horizontalLayoutWidget);
-        Rotationalite->setObjectName(QStringLiteral("Rotationalite"));
-        Rotationalite->setOrientation(Qt::Vertical);
-
-        horizontalLayout->addWidget(Rotationalite);
-
         Vitesse = new QSlider(horizontalLayoutWidget);
         Vitesse->setObjectName(QStringLiteral("Vitesse"));
+        Vitesse->setMaximum(240);
+        Vitesse->setSliderPosition(100);
         Vitesse->setOrientation(Qt::Vertical);
 
         horizontalLayout->addWidget(Vitesse);
 
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(790, 170, 55, 229));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -169,8 +194,13 @@ public:
 #ifndef QT_NO_SHORTCUT
         Up->setShortcut(QApplication::translate("MainWindow", "Up", nullptr));
 #endif // QT_NO_SHORTCUT
+        label_ip->setText(QApplication::translate("MainWindow", "IP", nullptr));
+        entry_ip->setText(QApplication::translate("MainWindow", "192.168.1.106", nullptr));
+        label_port->setText(QApplication::translate("MainWindow", "Port", nullptr));
+        entry_port->setText(QApplication::translate("MainWindow", "15020", nullptr));
         Se_connecter->setText(QApplication::translate("MainWindow", "Se connecter", nullptr));
         Se_deconnecter->setText(QApplication::translate("MainWindow", "Se deconnecter", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Vitesse", nullptr));
         menuWifiBot_Controller->setTitle(QApplication::translate("MainWindow", "WifiBot Controller", nullptr));
     } // retranslateUi
 

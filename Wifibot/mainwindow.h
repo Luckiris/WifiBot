@@ -22,17 +22,16 @@ public:
 
 private slots:
     void on_Se_connecter_clicked();
-
     void on_Se_deconnecter_clicked();
-
     void on_Vitesse_valueChanged(int value);
-
-    void updateTimer();
+    void updateTimerSend();
+    void updateTimerReceive();
 
 private:
     Ui::MainWindow *ui;
     Network *network;
-    QTimer *timer;
+    QTimer *timerSend;
+    QTimer *timerReceive;
     bool up = false;
     bool down = false;
     bool left = false;

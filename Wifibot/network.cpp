@@ -23,23 +23,27 @@ void Network::DoDisconnect(){
 }
 
 void Network::connected(){
-    qDebug() << "connected...";
+    //qDebug() << "connected...";
 }
 
 void Network::disconnected(){
-    qDebug() << "disconnected...";
+    //qDebug() << "disconnected...";
 }
 
 void Network::bytesWritten(qint64 bytes){
-    qDebug() << bytes << " bytes written...";
+    //qDebug() << bytes << " bytes written...";
 }
 
 
 void Network::readyRead(){
-    qDebug() << "reading...";
-    qDebug() << socket->readAll();
+    //qDebug() << "reading...";
+    messageReceived.SetData(socket->readAll());
 }
 
 void Network::SendMessage(Message message){
     this->socket->write(message.GetData());
+}
+
+Message Network::GetMessage(){
+    return messageReceived;
 }

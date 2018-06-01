@@ -83,3 +83,26 @@ short Message::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
 QByteArray Message::GetData(){
     return data;
 }
+
+void Message::UnbuildMessage(){
+    QByteArray temp = data;
+
+    /* Right side */
+    speedRight = (int) ((temp[1] << 8) + (temp[0]));
+    if (speedRight > 32767) speedRight -= 65536;
+    batteryLevel = temp[2];
+    ir_right = temp[3];
+    ir2_right = temp[4];
+    odometrie_right = ((((long)temp[8] << 24))+(((long)temp[7] << 16))+(((long)temp[6] << 8))+((long)temp[5]));
+
+    /* Left side */
+    speedLeft = (int)(temp[10] << 8) + temp[9];
+    if (speedLeft > 32767) speedLeft -= 65536;
+    ir_left = temp[11];
+    ir2_left = temp[12];
+    odometrie_left = ((((long)temp[16] << 24))+(((long)temp[15] << 16))+(((long)temp[14] << 8))+((long)temp[13]));
+}
+
+void Message::SetData(QByteArray data){
+    this->data = data;
+}

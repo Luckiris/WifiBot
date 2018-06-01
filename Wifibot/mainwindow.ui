@@ -17,8 +17,8 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>659</x>
-      <y>319</y>
+      <x>870</x>
+      <y>180</y>
       <width>171</width>
       <height>91</height>
      </rect>
@@ -87,13 +87,41 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>659</x>
-      <y>409</y>
+      <x>870</x>
+      <y>300</y>
       <width>171</width>
-      <height>91</height>
+      <height>201</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_ip">
+       <property name="text">
+        <string>IP</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="entry_ip">
+       <property name="text">
+        <string>192.168.1.106</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_port">
+       <property name="text">
+        <string>Port</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="entry_port">
+       <property name="text">
+        <string>15020</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QPushButton" name="Se_connecter">
        <property name="text">
@@ -113,28 +141,40 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>320</y>
-      <width>121</width>
-      <height>181</height>
+      <x>770</x>
+      <y>300</y>
+      <width>86</width>
+      <height>231</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QSlider" name="Rotationalite">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QSlider" name="Vitesse">
+       <property name="maximum">
+        <number>240</number>
+       </property>
+       <property name="sliderPosition">
+        <number>100</number>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>170</y>
+      <width>55</width>
+      <height>229</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Vitesse</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

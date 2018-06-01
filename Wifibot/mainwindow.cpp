@@ -1,32 +1,35 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-//Commentaire useless
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    network = new Network(this, "192.168.1.106", 15020);
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
+    timerSend = new QTimer(this);
+    timerReceive = new QTimer(this);
+    connect(timerSend, SIGNAL(timeout()), this, SLOT(updateTimerSend()));
+    connect(timerReceive, SIGNAL(timeout()), this, SLOT(updateTimerReceive()));
 }
 
-MainWindow::~MainWindow()
-{
-    delete timer;
-    delete network;
+MainWindow::~MainWindow(){
+    delete timerSend;
+    delete timerReceive;
     delete ui;
 }
 
-void MainWindow::on_Se_connecter_clicked()
-{
+void MainWindow::on_Se_connecter_clicked(){
+    network = new Network(this, ui->entry_ip->text(), ui->entry_port->text().toInt());
     network->DoConnect();
-    timer->start(25);
+    timerSend->start(25);
+    timerReceive->start(500);
 }
 
 void MainWindow::on_Se_deconnecter_clicked(){
-    timer->stop();
+    timerSend->stop();
+    timerReceive->stop();
     network->DoDisconnect();
+    delete network;
 }
 
 short MainWindow::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max){
@@ -52,10 +55,10 @@ void MainWindow::on_Vitesse_valueChanged(int value){
 
 }
 
-void MainWindow::updateTimer(){
+void MainWindow::updateTimerSend(){
     //===================UP
     if (up && down){
-        Message m(0 ,0);
+        Message m;
         m.Forward();
         m.BuildMessage();
         network->SendMessage(m);
@@ -67,62 +70,68 @@ void MainWindow::updateTimer(){
         network->SendMessage(m);
     }
     else if (up && right){
-        Message m(240 ,0);
+        Message m(ui->Vitesse->value(), 0);
         m.Forward();
         m.BuildMessage();
         network->SendMessage(m);
     }
     else if (up){
-        Message m(240 ,240);
+        Message m(ui->Vitesse->value(), ui->Vitesse->value());
         m.Forward();
         m.BuildMessage();
         network->SendMessage(m);
     }
     //==================DOWN
     else if (down && left){
-        Message m(240 ,0);
+        Message m(ui->Vitesse->value(), 0);
         m.Reverse();
         m.BuildMessage();
         network->SendMessage(m);
     }
     else if (down && right){
-        Message m(0 ,240);
+        Message m(0 ,ui->Vitesse->value());
         m.Reverse();
         m.BuildMessage();
         network->SendMessage(m);
     }
     else if (down){
-        Message m(240 ,240);
+        Message m(ui->Vitesse->value(), ui->Vitesse->value());
         m.Reverse();
         m.BuildMessage();
         network->SendMessage(m);
     }
     //====================LEFT
     else if (left && right){
-        Message m(0 ,0);
+        Message m;
         m.Forward();
         m.BuildMessage();
         network->SendMessage(m);
     }
     else if (left){
-        Message m(240 ,240);
+        Message m(ui->Vitesse->value() , ui->Vitesse->value());
         m.Left();
         m.BuildMessage();
         network->SendMessage(m);
     }
     //=======================RIGHT
     else if (right){
-        Message m(240 ,240);
+        Message m(ui->Vitesse->value() , ui->Vitesse->value());
         m.Right();
         m.BuildMessage();
         network->SendMessage(m);
     }
     //=====================NOTHING
     else {
-        Message m(0 ,0);
+        Message m;
         m.BuildMessage();
         network->SendMessage(m);
     }
+}
+
+void MainWindow::updateTimerReceive(){
+    Message message = network->GetMessage();
+    message.UnbuildMessage();
+    message.ShowMessage();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
