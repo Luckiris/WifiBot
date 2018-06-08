@@ -19,6 +19,11 @@ MainWindow::~MainWindow(){
 }
 
 void MainWindow::on_Se_connecter_clicked(){
+    this->ui->Vitesse->setEnabled(true);
+    this->ui->entry_ip->setEnabled(false);
+    this->ui->entry_port->setEnabled(false);
+    this->ui->Se_connecter->setEnabled(false);
+    this->ui->Se_deconnecter->setEnabled(true);
     network = new Network(this, ui->entry_ip->text(), ui->entry_port->text().toInt());
     network->DoConnect();
     timerSend->start(25);
@@ -26,6 +31,12 @@ void MainWindow::on_Se_connecter_clicked(){
 }
 
 void MainWindow::on_Se_deconnecter_clicked(){
+    this->ui->Vitesse->setEnabled(false);
+    this->ui->entry_ip->setEnabled(true);
+    this->ui->entry_port->setEnabled(true);
+    this->ui->Se_connecter->setEnabled(true);
+    this->ui->Se_deconnecter->setEnabled(false);
+    ResetUI();
     timerSend->stop();
     timerReceive->stop();
     network->DoDisconnect();
@@ -51,8 +62,10 @@ short MainWindow::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max){
     return(Crc);
 }
 
-void MainWindow::on_Vitesse_valueChanged(int value){
-
+void MainWindow::on_Vitesse_valueChanged(){
+    Message m(ui->Vitesse->value() , ui->Vitesse->value());
+    m.BuildMessage();
+    network->SendMessage(m);
 }
 
 void MainWindow::updateTimerSend(){
@@ -64,7 +77,7 @@ void MainWindow::updateTimerSend(){
         network->SendMessage(m);
     }
     else if (up && left){
-        Message m(0 ,240);
+        Message m(0 , ui->Vitesse->value());
         m.Forward();
         m.BuildMessage();
         network->SendMessage(m);
@@ -130,8 +143,9 @@ void MainWindow::updateTimerSend(){
 
 void MainWindow::updateTimerReceive(){
     Message message = network->GetMessage();
-    message.UnbuildMessage();
     message.ShowMessage();
+    message.UnbuildMessage();
+    UpdateUI(message);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
@@ -146,4 +160,48 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_S) down = false;
     if (event->key() == Qt::Key_Q) left = false;
     if (event->key() == Qt::Key_D) right = false;
+}
+
+void MainWindow::UpdateUI(Message message){
+    UpdateBattery(message.GetBattery());
+    UpdateCaptor(message.GetCaptorForwardLeft(), message.GetCaptorForwardRight(), message.GetCaptorReverseLeft(), message.GetCaptorReverseRight());
+}
+
+void MainWindow::UpdateBattery(int batteryLevel){
+    if (batteryLevel < 0){
+        batteryLevel = 100;
+        this->ui->barBattery->setFormat(" En charge");
+    }
+    else {
+        batteryLevel = (batteryLevel-100)*3.57;
+        this->ui->barBattery->setFormat("%p%");
+    }
+    this->ui->barBattery->setValue(batteryLevel);
+}
+
+void MainWindow::UpdateCaptor(int forwardLeft, int forwardRight, int reverseLeft, int reverseRight){
+    qDebug() << "IR AVANT GAUCHE : " << forwardLeft;
+    qDebug() << "IR AVANT DROIT : " << forwardRight;
+    qDebug() << "IR ARRIRE GAUCHE : " << reverseLeft;
+    qDebug() << "IR ARRIRE DROIT : " << reverseRight;
+
+    if (forwardLeft < 0) this->ui->barCaptorForwardLeft->setValue((forwardLeft + 255)/2.5);
+    else this->ui->barCaptorForwardLeft->setValue(forwardLeft);
+
+    if (forwardRight < 0) this->ui->barCaptorForwardLeft->setValue((forwardRight + 255)/2.5);
+    else this->ui->barCaptorForwardLeft->setValue(forwardRight);
+
+    if (reverseLeft < 0) this->ui->barCaptorForwardLeft->setValue((reverseLeft + 255)/2.5);
+    else this->ui->barCaptorForwardLeft->setValue(reverseLeft);
+
+    if (reverseRight < 0) this->ui->barCaptorForwardLeft->setValue((reverseRight + 255)/2.5);
+    else this->ui->barCaptorForwardLeft->setValue(reverseRight);
+}
+
+void MainWindow::ResetUI(){
+    this->ui->barBattery->setValue(0);
+    this->ui->barCaptorForwardLeft->setValue(0);
+    this->ui->barCaptorForwardRight->setValue(0);
+    this->ui->barCaptorReverseLeft->setValue(0);
+    this->ui->barCaptorReverseRight->setValue(0);
 }

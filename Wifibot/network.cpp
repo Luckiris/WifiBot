@@ -23,20 +23,18 @@ void Network::DoDisconnect(){
 }
 
 void Network::connected(){
-    //qDebug() << "connected...";
+    qDebug() << "[CONNECT] Connecté au WifiBot ...";
 }
 
 void Network::disconnected(){
-    //qDebug() << "disconnected...";
+    qDebug() << "[DISCONNECT] Déconnecté du WifiBot ...";
 }
 
 void Network::bytesWritten(qint64 bytes){
-    //qDebug() << bytes << " bytes written...";
+    qDebug() << "[INFO] " << bytes << " bytes écris ...";
 }
 
-
 void Network::readyRead(){
-    //qDebug() << "reading...";
     messageReceived.SetData(socket->readAll());
 }
 

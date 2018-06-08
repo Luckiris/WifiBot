@@ -2,10 +2,16 @@
 #include <QString>
 #include <QDebug>
 
-Message::Message(int speedLeft, int speedRight)
-{
+Message::Message(int speedLeft, int speedRight){
     this->speedLeft = speedLeft;
     this->speedRight = speedRight;
+    batteryLevel = 0;
+    ir_right = 0;
+    ir_left = 0;
+    ir2_right = 0;
+    ir2_left = 0;
+    odometrie_right = 0.0;
+    odometrie_left = 0.0;
 }
 
 void Message::BuildMessage(){
@@ -58,8 +64,7 @@ void Message::Reverse(){
     reverseRight = false;
 }
 
-short Message::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
-{
+short Message::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max){
     unsigned int Crc = 0xFFFF;
     unsigned int Polynome = 0xA001;
     unsigned int CptOctet = 0;
@@ -85,22 +90,20 @@ QByteArray Message::GetData(){
 }
 
 void Message::UnbuildMessage(){
-    QByteArray temp = data;
+    /* Left side */
+    speedLeft = (int) ((data[1] << 8) + (data[0]));
+    if (speedLeft > 32767) speedLeft -= 65536;
+    batteryLevel = data[2];
+    ir_left = data[3];
+    ir2_left = data[4];
+    odometrie_left = ((((long)data[8] << 24))+(((long)data[7] << 16))+(((long)data[6] << 8))+((long)data[5]));
 
     /* Right side */
-    speedRight = (int) ((temp[1] << 8) + (temp[0]));
+    speedRight = (int)(data[10] << 8) + data[9];
     if (speedRight > 32767) speedRight -= 65536;
-    batteryLevel = temp[2];
-    ir_right = temp[3];
-    ir2_right = temp[4];
-    odometrie_right = ((((long)temp[8] << 24))+(((long)temp[7] << 16))+(((long)temp[6] << 8))+((long)temp[5]));
-
-    /* Left side */
-    speedLeft = (int)(temp[10] << 8) + temp[9];
-    if (speedLeft > 32767) speedLeft -= 65536;
-    ir_left = temp[11];
-    ir2_left = temp[12];
-    odometrie_left = ((((long)temp[16] << 24))+(((long)temp[15] << 16))+(((long)temp[14] << 8))+((long)temp[13]));
+    ir_right = data[11];
+    ir2_right = data[12];
+    odometrie_right = ((((long)data[16] << 24))+(((long)data[15] << 16))+(((long)data[14] << 8))+((long)data[13]));
 }
 
 void Message::SetData(QByteArray data){
@@ -108,5 +111,25 @@ void Message::SetData(QByteArray data){
 }
 
 void Message::ShowMessage(){
-    qDebug() << "IR gauche : " << ir_left;
+    qDebug() << "Message reçu : " << data;
+}
+
+int Message::GetBattery(){
+    return batteryLevel;
+}
+
+int Message::GetCaptorForwardLeft(){
+    return ir_left;
+}
+
+int Message::GetCaptorForwardRight(){
+    return ir_right;
+}
+
+int Message::GetCaptorReverseLeft(){
+    return ir2_left;
+}
+
+int Message::GetCaptorReverseRight(){
+    return ir2_right;
 }

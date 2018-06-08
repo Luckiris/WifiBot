@@ -11,8 +11,8 @@ private:
     short GetChar7();
     QByteArray data;
     /* Speed (also used to save) */
-    int speedRight;
     int speedLeft;
+    int speedRight;
     /* True = Forward && False = reverse */
     bool reverseRight;
     bool reverseLeft;
@@ -36,6 +36,12 @@ public:
     void BuildMessage();
     void UnbuildMessage();
     void ShowMessage();
+    int GetSpeed();
+    int GetBattery();
+    int GetCaptorForwardLeft();
+    int GetCaptorForwardRight();
+    int GetCaptorReverseLeft();
+    int GetCaptorReverseRight();
 };
 
 #endif // MESSAGE_H

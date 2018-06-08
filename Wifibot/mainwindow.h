@@ -23,7 +23,7 @@ public:
 private slots:
     void on_Se_connecter_clicked();
     void on_Se_deconnecter_clicked();
-    void on_Vitesse_valueChanged(int value);
+    void on_Vitesse_valueChanged();
     void updateTimerSend();
     void updateTimerReceive();
 
@@ -37,6 +37,10 @@ private:
     bool left = false;
     bool right = false;
     short Crc16(unsigned char *Adresse_tab , unsigned char Taille_max);
+    void UpdateUI(Message message);
+    void UpdateBattery(int batteryLevel);
+    void UpdateCaptor(int forwardLeft, int forwardRight, int reverseLeft, int reverseRight);
+    void ResetUI();
 };
 
 #endif // MAINWINDOW_H

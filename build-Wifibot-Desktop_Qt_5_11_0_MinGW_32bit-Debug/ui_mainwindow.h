@@ -19,6 +19,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
@@ -50,7 +51,18 @@ public:
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QSlider *Vitesse;
-    QLabel *label;
+    QLabel *labelInformations;
+    QLabel *labelBattery;
+    QProgressBar *barBattery;
+    QLabel *labelVitesse;
+    QLabel *labelCaptorForwardLeft;
+    QProgressBar *barCaptorForwardLeft;
+    QLabel *labelCaptorForwardRight;
+    QProgressBar *barCaptorForwardRight;
+    QLabel *labelCaptorReverseLeft;
+    QLabel *labelCaptorReverseRight;
+    QProgressBar *barCaptorReverseLeft;
+    QProgressBar *barCaptorReverseRight;
     QMenuBar *menuBar;
     QMenu *menuWifiBot_Controller;
     QToolBar *mainToolBar;
@@ -65,7 +77,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(870, 180, 171, 91));
+        gridLayoutWidget->setGeometry(QRect(570, 470, 171, 91));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -99,7 +111,7 @@ public:
 
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(870, 300, 171, 201));
+        verticalLayoutWidget->setGeometry(QRect(880, 350, 171, 201));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -132,12 +144,13 @@ public:
 
         Se_deconnecter = new QPushButton(verticalLayoutWidget);
         Se_deconnecter->setObjectName(QStringLiteral("Se_deconnecter"));
+        Se_deconnecter->setEnabled(false);
 
         verticalLayout->addWidget(Se_deconnecter);
 
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(770, 300, 86, 231));
+        horizontalLayoutWidget->setGeometry(QRect(770, 330, 86, 231));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -145,15 +158,54 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         Vitesse = new QSlider(horizontalLayoutWidget);
         Vitesse->setObjectName(QStringLiteral("Vitesse"));
+        Vitesse->setEnabled(false);
         Vitesse->setMaximum(240);
         Vitesse->setSliderPosition(100);
         Vitesse->setOrientation(Qt::Vertical);
 
         horizontalLayout->addWidget(Vitesse);
 
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(790, 170, 55, 229));
+        labelInformations = new QLabel(centralWidget);
+        labelInformations->setObjectName(QStringLiteral("labelInformations"));
+        labelInformations->setGeometry(QRect(870, 20, 101, 16));
+        labelBattery = new QLabel(centralWidget);
+        labelBattery->setObjectName(QStringLiteral("labelBattery"));
+        labelBattery->setGeometry(QRect(760, 60, 121, 16));
+        barBattery = new QProgressBar(centralWidget);
+        barBattery->setObjectName(QStringLiteral("barBattery"));
+        barBattery->setGeometry(QRect(940, 60, 118, 23));
+        barBattery->setValue(0);
+        labelVitesse = new QLabel(centralWidget);
+        labelVitesse->setObjectName(QStringLiteral("labelVitesse"));
+        labelVitesse->setGeometry(QRect(790, 200, 55, 229));
+        labelCaptorForwardLeft = new QLabel(centralWidget);
+        labelCaptorForwardLeft->setObjectName(QStringLiteral("labelCaptorForwardLeft"));
+        labelCaptorForwardLeft->setGeometry(QRect(760, 100, 161, 20));
+        barCaptorForwardLeft = new QProgressBar(centralWidget);
+        barCaptorForwardLeft->setObjectName(QStringLiteral("barCaptorForwardLeft"));
+        barCaptorForwardLeft->setGeometry(QRect(940, 100, 118, 23));
+        barCaptorForwardLeft->setValue(0);
+        labelCaptorForwardRight = new QLabel(centralWidget);
+        labelCaptorForwardRight->setObjectName(QStringLiteral("labelCaptorForwardRight"));
+        labelCaptorForwardRight->setGeometry(QRect(760, 140, 161, 20));
+        barCaptorForwardRight = new QProgressBar(centralWidget);
+        barCaptorForwardRight->setObjectName(QStringLiteral("barCaptorForwardRight"));
+        barCaptorForwardRight->setGeometry(QRect(940, 140, 118, 23));
+        barCaptorForwardRight->setValue(0);
+        labelCaptorReverseLeft = new QLabel(centralWidget);
+        labelCaptorReverseLeft->setObjectName(QStringLiteral("labelCaptorReverseLeft"));
+        labelCaptorReverseLeft->setGeometry(QRect(760, 180, 161, 20));
+        labelCaptorReverseRight = new QLabel(centralWidget);
+        labelCaptorReverseRight->setObjectName(QStringLiteral("labelCaptorReverseRight"));
+        labelCaptorReverseRight->setGeometry(QRect(760, 220, 161, 20));
+        barCaptorReverseLeft = new QProgressBar(centralWidget);
+        barCaptorReverseLeft->setObjectName(QStringLiteral("barCaptorReverseLeft"));
+        barCaptorReverseLeft->setGeometry(QRect(940, 180, 118, 23));
+        barCaptorReverseLeft->setValue(0);
+        barCaptorReverseRight = new QProgressBar(centralWidget);
+        barCaptorReverseRight->setObjectName(QStringLiteral("barCaptorReverseRight"));
+        barCaptorReverseRight->setGeometry(QRect(940, 220, 118, 23));
+        barCaptorReverseRight->setValue(0);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -200,7 +252,13 @@ public:
         entry_port->setText(QApplication::translate("MainWindow", "15020", nullptr));
         Se_connecter->setText(QApplication::translate("MainWindow", "Se connecter", nullptr));
         Se_deconnecter->setText(QApplication::translate("MainWindow", "Se deconnecter", nullptr));
-        label->setText(QApplication::translate("MainWindow", "Vitesse", nullptr));
+        labelInformations->setText(QApplication::translate("MainWindow", "Informations", nullptr));
+        labelBattery->setText(QApplication::translate("MainWindow", "Batterie : ", nullptr));
+        labelVitesse->setText(QApplication::translate("MainWindow", "Vitesse", nullptr));
+        labelCaptorForwardLeft->setText(QApplication::translate("MainWindow", "Capteur Avant Gauche", nullptr));
+        labelCaptorForwardRight->setText(QApplication::translate("MainWindow", "Capteur Avant Droit", nullptr));
+        labelCaptorReverseLeft->setText(QApplication::translate("MainWindow", "Capteur Arri\303\250re Gauche", nullptr));
+        labelCaptorReverseRight->setText(QApplication::translate("MainWindow", "Capteur Arri\303\250re Droit", nullptr));
         menuWifiBot_Controller->setTitle(QApplication::translate("MainWindow", "WifiBot Controller", nullptr));
     } // retranslateUi
 

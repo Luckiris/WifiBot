@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[8];
-    char stringdata0[127];
+    QByteArrayData data[7];
+    char stringdata0[121];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,15 +36,14 @@ QT_MOC_LITERAL(1, 11, 23), // "on_Se_connecter_clicked"
 QT_MOC_LITERAL(2, 35, 0), // ""
 QT_MOC_LITERAL(3, 36, 25), // "on_Se_deconnecter_clicked"
 QT_MOC_LITERAL(4, 62, 23), // "on_Vitesse_valueChanged"
-QT_MOC_LITERAL(5, 86, 5), // "value"
-QT_MOC_LITERAL(6, 92, 15), // "updateTimerSend"
-QT_MOC_LITERAL(7, 108, 18) // "updateTimerReceive"
+QT_MOC_LITERAL(5, 86, 15), // "updateTimerSend"
+QT_MOC_LITERAL(6, 102, 18) // "updateTimerReceive"
 
     },
     "MainWindow\0on_Se_connecter_clicked\0\0"
     "on_Se_deconnecter_clicked\0"
-    "on_Vitesse_valueChanged\0value\0"
-    "updateTimerSend\0updateTimerReceive"
+    "on_Vitesse_valueChanged\0updateTimerSend\0"
+    "updateTimerReceive"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,14 +63,14 @@ static const uint qt_meta_data_MainWindow[] = {
  // slots: name, argc, parameters, tag, flags
        1,    0,   39,    2, 0x08 /* Private */,
        3,    0,   40,    2, 0x08 /* Private */,
-       4,    1,   41,    2, 0x08 /* Private */,
-       6,    0,   44,    2, 0x08 /* Private */,
-       7,    0,   45,    2, 0x08 /* Private */,
+       4,    0,   41,    2, 0x08 /* Private */,
+       5,    0,   42,    2, 0x08 /* Private */,
+       6,    0,   43,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    5,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -86,12 +85,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->on_Se_connecter_clicked(); break;
         case 1: _t->on_Se_deconnecter_clicked(); break;
-        case 2: _t->on_Vitesse_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->on_Vitesse_valueChanged(); break;
         case 3: _t->updateTimerSend(); break;
         case 4: _t->updateTimerReceive(); break;
         default: ;
         }
     }
+    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = {
